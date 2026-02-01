@@ -8,3 +8,4 @@ display one country, then display all
 country card -> add flag to top (new div), add content text to bottom (bottom div)
 display all on home page
 
+(onclick) of card open and show about the card

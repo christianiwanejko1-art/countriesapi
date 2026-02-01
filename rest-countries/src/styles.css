@@ -12,6 +12,7 @@
   display: grid;
   grid-template-rows: 1fr 1fr 6fr;
   min-width: 0;
+  overflow-x: hidden;
 }
 
 nav {
@@ -97,6 +98,7 @@ nav {
   display: grid;
   grid-template-rows: auto 1fr;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.151);
+  cursor: pointer;
 }
 
 .cardTop {
@@ -126,19 +128,19 @@ span {
   margin-bottom: 16px;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1350px) {
   #containerCountries {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 980px) {
   #containerCountries {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 660px) {
   #containerCountries {
     grid-template-columns: 1fr;
   }
