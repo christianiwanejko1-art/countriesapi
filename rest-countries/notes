@@ -6,4 +6,5 @@ https://restcountries.com/v3.1/all?fields=name,flags,population,region
 display one country, then display all
 
 country card -> add flag to top (new div), add content text to bottom (bottom div)
+display all on home page
 

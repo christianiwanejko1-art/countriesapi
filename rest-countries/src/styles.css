@@ -3,6 +3,7 @@
   margin: 0;
   font-family: 'Roboto';
   font-size: 16px;
+  box-sizing: border-box;
 }
 
 #main {
@@ -103,6 +104,7 @@ nav {
   background-size: cover;
   background-position: center;
   aspect-ratio: 3 / 2;
+  margin: 0 auto;
 }
 
 .cardBottom {

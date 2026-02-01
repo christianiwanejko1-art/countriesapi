@@ -47,20 +47,10 @@ body.append(main);
 
 
 
-async function init() {
-  const data = await fetchCountry("United Kingdom");
-  return data;
-}
-const country = init();
 
-async function fetchInit() {
-  const data = await fetchAllCountries();
-  console.log(data);
-}
 
 // fetchInit();
 
-console.log(country);
 
 async function createCard(country) {
   const data = await fetchCountry(country);
@@ -95,4 +85,20 @@ async function createCard(country) {
   countries.appendChild(card);
 }
 
-createCard('United Kingdom');
+async function init() {
+  const data = await fetchCountry("United Kingdom");
+  return data;
+}
+const country = init();
+
+async function fetchInit() {
+  const data = await fetchAllCountries();
+  console.log(data);
+  for (let i=0; i < data.length; i++){
+    createCard(`${data[i].name.common}`)
+  }
+}
+
+fetchInit();
+
+// createCard('United Kingdom');
