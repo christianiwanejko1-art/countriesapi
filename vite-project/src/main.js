@@ -99,10 +99,38 @@ function renderHomepage() {
   cardBottom.append(cardName, cardPopulation, cardRegion, cardCapital);
 
   card.append(cardTop, cardBottom);
-  card.addEventListener("click",(e)=>{
+  card.addEventListener("click",async (e)=>{
+    const main = document.getElementById('main');
     const card = e.target.closest('.card');
     const name = card.querySelector('.cardName').textContent;
-    console.log(name);
+    main.style.display = 'none';
+    const data = await fetchCountry(name);
+    console.log(data);
+    const mainContent = document.getElementById('mainContent');
+    const back = document.createElement('div');
+    back.classList.add('back');
+    const backBtn = document.createElement('button');
+    backBtn.classList.add('backBtn');
+    backBtn.textContent = 'Back';
+
+
+    const leftSide = document.createElement('div');
+    leftSide.classList.add('leftSide');
+    leftSide.style.backgroundImage = `url(${data[0].flags.png})`
+    const rightSide = document.createElement('div');
+    rightSide.classList.add('rightSide');
+    backBtn.addEventListener('click', ()=>{
+      const main = document.getElementById('main');
+      main.remove()
+      const mainContent = document.getElementById('mainContent');
+      renderHomepage();
+      main.style.display = 'grid';
+      mainContent.remove();
+    });
+    back.appendChild(backBtn);
+    mainContent.append(back, leftSide, rightSide);
+    const body = document.querySelector('body');
+    body.appendChild(mainContent);
   })
   
   countries.appendChild(card);
@@ -129,17 +157,17 @@ async function fetchInit() {
   for (let i=0; i < data.length; i++){
     createCard(`${data[i].name.common}`)
   }
-  
+
 }
 fetchInit();
 
 }
 
 
-renderHomepage()
-renderNav()
 
-// fetchInit();
+
+renderHomepage()
+
 
 
 

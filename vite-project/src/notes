@@ -12,3 +12,9 @@ display all on home page
 take the card name add api call it
 
 mainContent - nav, back, flag/container/info, empty space
+to render the main information on the page it should take the value and use for api call (single with corresponding data)
+
+add new margin left and right to main content
+add image on left side, data on the right side -> Country name, native name, population, region, sub region, capital, top level domain, currencies, languages
+
+re-render nav when clicked on the flag

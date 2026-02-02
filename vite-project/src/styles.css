@@ -13,7 +13,6 @@
   grid-template-rows: 1fr 1fr 6fr;
   min-width: 0;
   overflow-x: hidden;
-  display: none;
 }
 
 #mainContent {
@@ -93,8 +92,8 @@ nav {
 
 /* countries */
 #containerCountries {
-  margin-left: 10%;
-  margin-right: 10%;
+  width: 80%;
+  margin: 0 auto;
   height: auto;
   box-sizing: border-box;
   display: grid;
@@ -147,6 +146,24 @@ span {
 
 #mainContent nav {
   grid-column: 1 / 3;
+}
+
+.back {
+  grid-column: 1 / 3;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.leftSide, .rightSide {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.leftSide {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  aspect-ratio: 3 / 2;
 }
 
 @media (max-width: 1350px) {
