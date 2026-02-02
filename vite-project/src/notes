@@ -1,0 +1,14 @@
+set up github repo
+nav bar, search bar - make sure these work correctly - add filter
+display the countries - all of them on main page (population, region, capital)
+https://restcountries.com/v3.1/all?fields=name,flags,population,region
+
+display one country, then display all
+
+country card -> add flag to top (new div), add content text to bottom (bottom div)
+display all on home page
+
+(onclick) of card open and show about the card - re render home on click of back button
+take the card name add api call it
+
+mainContent - nav, back, flag/container/info, empty space

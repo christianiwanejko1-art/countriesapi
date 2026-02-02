@@ -1,0 +1,147 @@
+import "./styles.css";
+import { fetchCountry, fetchAllCountries } from "./requests";
+
+function renderNav() {
+  const body = document.querySelector('body');
+
+  const mainContent = document.createElement('div');
+  mainContent.id = 'mainContent';
+  const nav = document.createElement('nav');
+  const title = document.createElement('h1');
+  title.classList.add('title');
+  title.textContent = 'Where in the world?';
+
+  const img = document.createElement('img');
+  img.src = "/src/icons/theme.svg";;
+  img.id = 'modeIcon';
+
+  const mode = document.createElement('h1');
+  mode.classList.add('mode');
+  mode.textContent = 'Dark Mode';
+  const modeContainer = document.createElement('div');
+  modeContainer.id = 'modeContainer';
+  modeContainer.append(img, mode);
+
+  nav.append(title, modeContainer);
+  mainContent.append(nav)
+  body.appendChild(mainContent)
+}
+
+function renderHomepage() {
+  const body = document.querySelector('body');
+
+  const main = document.createElement('div');
+  main.id = 'main';
+  const nav = document.createElement('nav');
+  const title = document.createElement('h1');
+  title.classList.add('title');
+  title.textContent = 'Where in the world?';
+
+  const img = document.createElement('img');
+  img.src = "/src/icons/theme.svg";;
+  img.id = 'modeIcon';
+
+  const mode = document.createElement('h1');
+  mode.classList.add('mode');
+  mode.textContent = 'Dark Mode';
+  const modeContainer = document.createElement('div');
+  modeContainer.id = 'modeContainer';
+  modeContainer.append(img, mode);
+
+  nav.append(title, modeContainer);
+
+  const search = document.createElement('div');
+  search.id = 'search';
+  const input = document.createElement('input');
+  input.type = 'search';
+  input.placeholder = 'Search for a country...';
+  input.className = 'search-input';
+  search.appendChild(input);
+  const icon3 = document.createElement('img');
+  icon3.className = 'search-icon';
+  icon3.src = "/src/icons/magnify.svg";;
+  const searchWrapper = document.createElement('div');
+  searchWrapper.classList.add('searchWrapper');
+  searchWrapper.append(icon3,input)
+  search.appendChild(searchWrapper);
+  const containerCountries = document.createElement('div');
+  containerCountries.id = 'containerCountries';
+
+  main.append(nav, search, containerCountries);
+
+
+  body.append(main);
+
+  async function createCard(country) {
+  const data = await fetchCountry(country);
+  const countries = document.getElementById('containerCountries');
+  const card = document.createElement('div');
+  card.classList.add('card');
+  const cardTop = document.createElement('div');
+  cardTop.classList.add('cardTop');
+  cardTop.style.backgroundImage = `url(${data[0].flags.png})`
+  const cardBottom = document.createElement('div');
+  cardBottom.classList.add('cardBottom');
+
+  const cardName = document.createElement('h1');
+  cardName.innerHTML = `${data[0].name.common}`;
+  cardName.classList.add('cardName');
+  const cardPopulation = document.createElement('p');
+  cardPopulation.classList.add('cardPopulation');
+  cardPopulation.innerHTML =  `<span>Population:</span> ${data[0].population}`
+  const cardRegion = document.createElement('p');
+  cardRegion.classList.add('cardRegion');
+  cardRegion.innerHTML = `<span>Region:</span> ${data[0].region}`;
+  const cardCapital = document.createElement('p');
+  cardCapital.classList.add('cardCapital');
+  cardCapital.innerHTML = `<span>Capital:</span> ${data[0].capital}`;
+
+  cardBottom.append(cardName, cardPopulation, cardRegion, cardCapital);
+
+  card.append(cardTop, cardBottom);
+  card.addEventListener("click",(e)=>{
+    const card = e.target.closest('.card');
+    const name = card.querySelector('.cardName').textContent;
+    console.log(name);
+  })
+  
+  countries.appendChild(card);
+}
+
+function renderCountry() {
+  renderNav();
+  const body = document.querySelector('body');
+  const main = document.getElementById('mainContent');
+  const h1 = document.createElement('h1');
+  h1.textContent = 'hello world!';
+  main.appendChild(h1);
+  body.appendChild(main);
+}
+
+async function init() {
+  const data = await fetchCountry("United Kingdom");
+  return data;
+}
+const country = init();
+
+async function fetchInit() {
+  const data = await fetchAllCountries();
+  for (let i=0; i < data.length; i++){
+    createCard(`${data[i].name.common}`)
+  }
+  
+}
+fetchInit();
+
+}
+
+
+renderHomepage()
+renderNav()
+
+// fetchInit();
+
+
+
+
+// createCard('United Kingdom');
