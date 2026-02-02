@@ -163,7 +163,7 @@ span {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  aspect-ratio: 3 / 2;
+  /* aspect-ratio: 3 / 2; */
 }
 
 @media (max-width: 1350px) {

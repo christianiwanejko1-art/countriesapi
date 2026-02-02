@@ -1,5 +1,5 @@
 import "./styles.css";
-import { fetchCountry, fetchAllCountries } from "./requests";
+import { fetchCountry, fetchAllCountries, fetchIndividualCountry } from "./requests";
 
 function renderNav() {
   const body = document.querySelector('body');
@@ -100,13 +100,14 @@ function renderHomepage() {
 
   card.append(cardTop, cardBottom);
   card.addEventListener("click",async (e)=>{
+    renderNav();
     const main = document.getElementById('main');
     const card = e.target.closest('.card');
     const name = card.querySelector('.cardName').textContent;
     main.style.display = 'none';
-    const data = await fetchCountry(name);
+    const data = await fetchIndividualCountry(name);
     console.log(data);
-    const mainContent = document.getElementById('mainContent');
+    // const mainContent = document.createElement('mainContent');
     const back = document.createElement('div');
     back.classList.add('back');
     const backBtn = document.createElement('button');
@@ -136,21 +137,15 @@ function renderHomepage() {
   countries.appendChild(card);
 }
 
-function renderCountry() {
-  renderNav();
-  const body = document.querySelector('body');
-  const main = document.getElementById('mainContent');
-  const h1 = document.createElement('h1');
-  h1.textContent = 'hello world!';
-  main.appendChild(h1);
-  body.appendChild(main);
-}
+// function renderCountry() {
 
-async function init() {
-  const data = await fetchCountry("United Kingdom");
-  return data;
-}
-const country = init();
+// }
+
+// async function init() {
+//   const data = await fetchCountry("United Kingdom");
+//   return data;
+// }
+// const country = init();
 
 async function fetchInit() {
   const data = await fetchAllCountries();

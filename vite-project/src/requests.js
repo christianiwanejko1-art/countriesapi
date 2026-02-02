@@ -11,3 +11,12 @@ export async function fetchAllCountries(){
   if (!res.ok) throw new Error(`Request failed: ${res.status}`);
   return await res.json()
 }
+
+export async function fetchIndividualCountry(name){
+  const url = `https://restcountries.com/v3.1/name/${encodeURIComponent(name)}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+  return await res.json();
+}
+
+// Country name, native name, population, region, sub region, capital, top level domain, currencies, languages
