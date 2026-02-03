@@ -136,14 +136,43 @@ function renderHomepage() {
     const nativeName = Object.values(first)[0].official;
     rightSideNativeName.innerHTML =  `<span class='countryInfo'>Native Name:</span> ${nativeName}`;
     // population
-    const rightSidePopulation = document.createElement('div');
+    const rightSidePopulation = document.createElement('p');
     const population = data[0].population;
     rightSidePopulation.innerHTML = `<span class='countryInfo'>Population:</span> ${population}`;
     // region
-
-    rightSideInfoLeft.append(rightSideNativeName, rightSidePopulation);
+    const rightSideRegion = document.createElement('p');
+    const region = data[0].region;
+    rightSideRegion.innerHTML = `<span class='countryInfo'>Region:</span> ${region}`;
+    // sub region
+    const rightSideSubRegion = document.createElement('p');
+    const subregion = data[0].subregion;
+    rightSideSubRegion.innerHTML = `<span class='countryInfo'>Sub Region:</span> ${subregion}`;
+    // capital
+    const rightSideCapital = document.createElement('p');
+    const capital = data[0].capital[0];
+    rightSideCapital.innerHTML = `<span class='countryInfo'>Capital:</span> ${capital}`;
+    rightSideInfoLeft.append(rightSideNativeName, rightSidePopulation, rightSideRegion, rightSideSubRegion, rightSideCapital);
 
     rightSide.append(rightSideTitle,rightSideInfoLeft,rightSideInfoRight);
+
+    // Top Level Domain
+    const rightSideTLD = document.createElement('p');
+    const tld = data[0].tld[0];
+    rightSideTLD.innerHTML = `<span class='countryInfo'>Top Level Domain:</span> ${tld}`;
+    // Currencies
+    const rightsideCurrencies = document.createElement('p');
+    const currencies = data[0].currencies;
+    const currenciesFirst = Object.values(currencies)[0].name;
+    rightsideCurrencies.innerHTML = `<span class='countryInfo'>Currencies:</span> ${currenciesFirst}`;
+    // Languages
+    const rightSideLanguages = document.createElement('p');
+    const languages = data[0].languages
+    const lang = Object.values(languages);
+    const langStr = lang.join(', ');
+    rightSideLanguages.innerHTML = `<span class='countryInfo'>Languages:</span> ${langStr}`;
+
+
+    rightSideInfoRight.append(rightSideTLD, rightsideCurrencies, rightSideLanguages);
     backBtn.addEventListener('click', ()=>{
       const main = document.getElementById('main');
       main.remove()
