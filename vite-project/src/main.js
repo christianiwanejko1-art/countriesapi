@@ -120,6 +120,30 @@ function renderHomepage() {
     leftSide.style.backgroundImage = `url(${data[0].flags.png})`
     const rightSide = document.createElement('div');
     rightSide.classList.add('rightSide');
+
+    // right side - split into 3 sections
+    const rightSideInfoLeft = document.createElement('div');
+    const rightSideInfoRight = document.createElement('div');
+    rightSideInfoLeft.classList.add('rightSideInfoLeft');
+    rightSideInfoRight.classList.add('rightSideInfoRight');
+    const rightSideTitle = document.createElement('h1');
+    rightSideTitle.classList.add('rightSideTitle');
+    rightSideTitle.textContent = `${data[0].name.common}`
+    // native name
+    const rightSideNativeName = document.createElement('p');
+    const data2 = data[0].name.nativeName;
+    const first = Object.values(data2);
+    const nativeName = Object.values(first)[0].official;
+    rightSideNativeName.innerHTML =  `<span class='countryInfo'>Native Name:</span> ${nativeName}`;
+    // population
+    const rightSidePopulation = document.createElement('div');
+    const population = data[0].population;
+    rightSidePopulation.innerHTML = `<span class='countryInfo'>Population:</span> ${population}`;
+    // region
+
+    rightSideInfoLeft.append(rightSideNativeName, rightSidePopulation);
+
+    rightSide.append(rightSideTitle,rightSideInfoLeft,rightSideInfoRight);
     backBtn.addEventListener('click', ()=>{
       const main = document.getElementById('main');
       main.remove()

@@ -2,3 +2,6 @@ nav bar -> title (Where in the world?), change from light mode to dark mode (and
 Search for country, filter by region
 Showcase all countries (name, pop, region, capital)
 Be responsive on mobile and tablet view
+
+api -> test one country first, then show all on the web page
+api - https://restcountries.com/#endpoints-all - 

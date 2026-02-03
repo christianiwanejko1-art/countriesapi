@@ -1,6 +1,8 @@
 import "./styles.css";
 import icon from './icons/theme.svg';
 import icon2 from './icons/magnify.svg';
+import { fetchCountry } from "./requests";
+export {};
 
 const body = document.querySelector('body');
 
@@ -41,3 +43,10 @@ search.appendChild(searchWrapper);
 
 main.append(nav, search);
 body.append(main);
+
+
+async function init() {
+  const data = await fetchCountry("France");
+  console.log(data);
+}
+init();
