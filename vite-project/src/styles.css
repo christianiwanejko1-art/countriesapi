@@ -144,6 +144,10 @@ span {
   /* margin-left: 10%; */
 }
 
+.borderContainer {
+  grid-column: 1 / 3;
+}
+
 #mainContent nav {
   grid-column: 1 / 3;
 }
@@ -172,8 +176,18 @@ span {
   grid-template-columns: 1fr 1fr;
 }
 
+.rightSide p {
+  font-size: 16px;
+  padding: 8px 0;
+  box-sizing: border-box;
+}
+
+
 .rightSideTitle {
   grid-column: 1 / 3;
+  font-size: 32px;
+  align-self: end;
+  padding-bottom: 16px;
 }
 
 .countryInfo {

@@ -1,6 +1,5 @@
 import "./styles.css";
 import { fetchCountry, fetchAllCountries, fetchIndividualCountry } from "./requests";
-
 function renderNav() {
   const body = document.querySelector('body');
 
@@ -153,7 +152,6 @@ function renderHomepage() {
     rightSideCapital.innerHTML = `<span class='countryInfo'>Capital:</span> ${capital}`;
     rightSideInfoLeft.append(rightSideNativeName, rightSidePopulation, rightSideRegion, rightSideSubRegion, rightSideCapital);
 
-    rightSide.append(rightSideTitle,rightSideInfoLeft,rightSideInfoRight);
 
     // Top Level Domain
     const rightSideTLD = document.createElement('p');
@@ -171,8 +169,23 @@ function renderHomepage() {
     const langStr = lang.join(', ');
     rightSideLanguages.innerHTML = `<span class='countryInfo'>Languages:</span> ${langStr}`;
 
+    // border countries
+    const borderContainer = document.createElement('div');
+    borderContainer.classList.add('borderContainer');
+    const borderTitle = document.createElement('h1');
+    borderTitle.textContent = 'Border Countries:';
+    const dataBorders = data[0].borders;
+    if (dataBorders !== undefined){
+      dataBorders.forEach((border)=>{
+        console.log(border);
+      })
+    }
 
+
+    rightSide.append(rightSideTitle,rightSideInfoLeft,rightSideInfoRight, borderContainer);
     rightSideInfoRight.append(rightSideTLD, rightsideCurrencies, rightSideLanguages);
+
+
     backBtn.addEventListener('click', ()=>{
       const main = document.getElementById('main');
       main.remove()
@@ -210,9 +223,6 @@ async function fetchInit() {
 fetchInit();
 
 }
-
-
-
 
 renderHomepage()
 

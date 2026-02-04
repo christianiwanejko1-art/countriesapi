@@ -18,3 +18,6 @@ add new margin left and right to main content
 add image on left side, data on the right side -> Country name, native name, population, region, sub region, capital, top level domain, currencies, languages
 
 re-render nav when clicked on the flag
+
+
+api call for each border (check if has border key), each border has its own card inside of parent element
