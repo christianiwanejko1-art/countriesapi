@@ -6,7 +6,7 @@ export async function fetchCountry(name) {
 }
 
 export async function fetchAllCountries(){
-  const url =  'https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital'
+  const url =  'https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,cca3'
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Request failed: ${res.status}`);
   return await res.json()
@@ -14,6 +14,13 @@ export async function fetchAllCountries(){
 
 export async function fetchIndividualCountry(name){
   const url = `https://restcountries.com/v3.1/name/${encodeURIComponent(name)}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+  return await res.json();
+}
+
+export async function fetchBorders(borderAbr){
+  const url = `https://restcountries.com/v3.1/alpha?codes=${borderAbr}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Request failed: ${res.status}`);
   return await res.json();

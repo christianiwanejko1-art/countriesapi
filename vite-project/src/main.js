@@ -1,5 +1,5 @@
 import "./styles.css";
-import { fetchCountry, fetchAllCountries, fetchIndividualCountry } from "./requests";
+import { fetchCountry, fetchAllCountries, fetchIndividualCountry, fetchBorders } from "./requests";
 function renderNav() {
   const body = document.querySelector('body');
 
@@ -72,28 +72,38 @@ function renderHomepage() {
   body.append(main);
 
   async function createCard(country) {
-  const data = await fetchCountry(country);
+  const data = country;
   const countries = document.getElementById('containerCountries');
   const card = document.createElement('div');
   card.classList.add('card');
   const cardTop = document.createElement('div');
   cardTop.classList.add('cardTop');
-  cardTop.style.backgroundImage = `url(${data[0].flags.png})`
+  if (data !== undefined){
+    cardTop.style.backgroundImage = `url(${data.flags.png})`
+  }
   const cardBottom = document.createElement('div');
   cardBottom.classList.add('cardBottom');
 
   const cardName = document.createElement('h1');
-  cardName.innerHTML = `${data[0].name.common}`;
+  if (data !== undefined){
+    cardName.innerHTML = `${data.name.common}`;
+  }
   cardName.classList.add('cardName');
   const cardPopulation = document.createElement('p');
   cardPopulation.classList.add('cardPopulation');
-  cardPopulation.innerHTML =  `<span>Population:</span> ${data[0].population}`
+  if (data !== undefined){
+    cardPopulation.innerHTML =  `<span>Population:</span> ${data.population}`
+  }
   const cardRegion = document.createElement('p');
   cardRegion.classList.add('cardRegion');
-  cardRegion.innerHTML = `<span>Region:</span> ${data[0].region}`;
+  if (data !== undefined){
+    cardRegion.innerHTML = `<span>Region:</span> ${data.region}`;
+  }
   const cardCapital = document.createElement('p');
   cardCapital.classList.add('cardCapital');
-  cardCapital.innerHTML = `<span>Capital:</span> ${data[0].capital}`;
+  if (data !== undefined){
+    cardCapital.innerHTML = `<span>Capital:</span> ${data.capital}`;
+  }
 
   cardBottom.append(cardName, cardPopulation, cardRegion, cardCapital);
 
@@ -105,7 +115,6 @@ function renderHomepage() {
     const name = card.querySelector('.cardName').textContent;
     main.style.display = 'none';
     const data = await fetchIndividualCountry(name);
-    console.log(data);
     // const mainContent = document.createElement('mainContent');
     const back = document.createElement('div');
     back.classList.add('back');
@@ -176,10 +185,13 @@ function renderHomepage() {
     borderTitle.textContent = 'Border Countries:';
     const dataBorders = data[0].borders;
     if (dataBorders !== undefined){
-      dataBorders.forEach((border)=>{
-        console.log(border);
+      const fetchPromises = dataBorders.map(border => fetchBorders(border));
+      const countryArray = await Promise.all(fetchPromises);
+      countryArray.forEach((border)=>{
+        console.log(border[0].name.common);
       })
     }
+
 
 
     rightSide.append(rightSideTitle,rightSideInfoLeft,rightSideInfoRight, borderContainer);
@@ -215,9 +227,15 @@ function renderHomepage() {
 
 async function fetchInit() {
   const data = await fetchAllCountries();
-  for (let i=0; i < data.length; i++){
-    createCard(`${data[i].name.common}`)
-  }
+  data.forEach(country => {
+    try {
+      if (country.name && country.name.official) {
+        createCard(country);
+      }
+    } catch (error) {
+      console.error("Error creating card for:", country, error);
+    }
+  });
 
 }
 fetchInit();
@@ -228,6 +246,3 @@ renderHomepage()
 
 
 
-
-
-// createCard('United Kingdom');

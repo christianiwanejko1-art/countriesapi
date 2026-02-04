@@ -19,5 +19,7 @@ add image on left side, data on the right side -> Country name, native name, pop
 
 re-render nav when clicked on the flag
 
-
 api call for each border (check if has border key), each border has its own card inside of parent element
+
+handle undefined data -> should not display anything
+make sure that the correct code is being passed through to the second api call (api call after a user clicks on a flag / country)
